@@ -6,17 +6,19 @@ var express = require("express"),
     request = require('request');
     fs = require('fs');
     underscore = require("underscore");
+    cors = require('cors');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
+app.use(cors());
 
 var router = express.Router();
 var hoteles = JSON.parse(fs.readFileSync('./models/data.json'));
 
 router.get('/', function(req, res) {
     console.log(hoteles);
-    res.send(hoteles);
+    res.json(hoteles);
 });
 
 router.get('/byId', function(req, res){
